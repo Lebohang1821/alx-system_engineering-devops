@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+# It prints Best School 10-times - until loop
+
+v=0
+
+until [ $v -eq 10 ]
+do
+  echo "Best School"
+  (( v++ ))
+done
