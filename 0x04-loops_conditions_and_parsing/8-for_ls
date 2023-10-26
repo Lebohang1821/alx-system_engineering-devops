@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# Prints content of current directory in list format
+#   Only Pri part of name after first dash
+
+list=$(ls)
+for x in $list
+do
+	echo "$x" | cut -d '-' -f2
+done
