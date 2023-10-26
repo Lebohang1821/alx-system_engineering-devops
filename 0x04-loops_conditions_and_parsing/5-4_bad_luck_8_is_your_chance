@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+# It Loops from 1-10 and prints:
+#   "bad luck" 4th iter
+#   "good luck" 8th iter
+#   "Best School" all other iter
+
+x=0
+
+while [ $x -lt 10 ]
+do
+  if [ $x -eq 3 ]
+  then
+    echo "bad luck"
+  elif [ $x -eq 7 ]
+  then
+    echo "good luck"
+  else
+    echo "Best School"
+  fi
+  (( x++ ))
+done
