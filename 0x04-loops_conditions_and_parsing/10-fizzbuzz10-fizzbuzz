@@ -1,0 +1,22 @@
+#!/usr/bin/env bash
+# Prins num from 1 - 100 in list format
+#   Pri "FizzBuzz" when number is mult of 3 and 5
+#   Pri "Fizz" when number is mult of 3
+#   Pri "Buzz" when number is mul of 5
+#   Otherwise, it prints number.
+
+for num in {1..100}
+do
+  if (( num % 3 == 0 && num % 5 == 0 ))
+  then
+    echo "FizzBuzz"
+  elif (( num % 3 == 0 ))
+  then
+    echo "Fizz"
+  elif (( num % 5 == 0 ))
+  then
+    echo "Buzz"
+  else
+    echo "$num"
+  fi
+done
