@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# It configures Ubuntu server as follows:
+#   - The localhost resolves - 127.0.0.2
+#   - The facebook.com resolves - 8.8.8.8
+
+# It copy existing etc
+cp /etc/hosts ~/hosts.new
+
+# It adds a new entry
+echo "127.0.0.2		localhost" > ~/hosts.new
+
+# It append entry
+echo "8.8.8.8		facebook.com" >> ~/hosts.new
+
+# Overwrite original /etc/hosts with modified ~/hosts.new file.
+cp -f ~/hosts.new /etc/hosts
