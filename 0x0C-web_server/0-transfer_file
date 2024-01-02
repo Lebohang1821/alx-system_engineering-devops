@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+
+# Check if the number of parameters is less than 4
+if [ "$#" -lt 4 ]; then
+    echo "Usage: $0 PATH_TO_FILE IP USERNAME PATH_TO_SSH_KEY"
+    exit 1
+fi
+
+# Assign parameters to variables
+file_path=$1
+server_ip=$2
+username=$3
+ssh_key_path=$4
+
+# Display remote directory contents before file transfer
+echo "Remote directory contents before file transfer:"
+ssh -o StrictHostKeyChecking=no -i "$ssh_key_path" "$username@$server_ip" "ls ~/"
+
+# Execute scp command to transfer the file
+scp -o StrictHostKeyChecking=no -i "$ssh_key_path" "$file_path" "$username@$server_ip:~/"
+
+# Check the exit status of the scp command
+if [ $? -eq 0 ]; then
+    echo "File transferred successfully!"
+else
+    echo "Error transferring file. Please check your parameters and try again."
+    exit 1
+fi
+
+# Display remote directory contents after file transfer
+echo "Remote directory contents after file transfer:"
+ssh -o StrictHostKeyChecking=no -i "$ssh_key_path" "$username@$server_ip" "ls ~/"
