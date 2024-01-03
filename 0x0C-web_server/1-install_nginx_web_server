@@ -1,15 +1,7 @@
 #!/usr/bin/env bash
 # It install nginx on your web-01
+
 sudo apt-get update
-
-# It install Nginx
 sudo apt-get -y install nginx
-
-# Create simple HTML file with "Hello World!"
-echo 'Hello World!' | sudo tee /var/www/html/index.html > /dev/null
-
-# Nginx service
-sudo service nginx start
-
-# Print message indicating successful configuration
-echo "Nginx installed and configured. Hello World!"
+echo 'Hello World!' > /var/www/html/index.html
+service nginx start
