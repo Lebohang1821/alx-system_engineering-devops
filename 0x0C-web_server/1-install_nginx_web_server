@@ -1,5 +1,6 @@
 #!/usr/bin/env bash
-# It install nginx on your web-01
+# installs nginx and configure it to listen on port 80
+# print "Hello World"
 
 sudo apt-get update
 sudo apt-get -y install nginx
