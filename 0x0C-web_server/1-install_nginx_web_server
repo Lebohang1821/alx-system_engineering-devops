@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# It install nginx on your web-01
+# It installs nginx on your web-01
 # It should print Hello Worls!
 
 sudo apt-get update
