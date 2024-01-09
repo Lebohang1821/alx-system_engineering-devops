@@ -1,40 +1,34 @@
 #!/usr/bin/env bash
-# Update the package list and install Nginx
-# Allow HTTP traffic through UFW
+# It configure Nginx so that its HTTP response contains custom header
+# It names of custom HTTP header must be X-Served-By
+# Value of custom HTTP header must be hostname of server Nginx is running on
+# Sudo sed -i 's/server_name _;.*/server_name _;\n\tadd_header X-Served-By \$hostname;/' /etc/nginx/sites-enabled/default 
 sudo apt-get -y update
 sudo apt-get -y install nginx
+sudo ufw allow 'Nginx HTTP'
 sudo mkdir -p /var/www/html /var/www/error
 sudo chmod -R 755 /var/www
-
-# Create index.html and 404.html files
 echo 'Hello World!' > /var/www/html/index.html
 echo "Ceci n'est pas une page" > /var/www/html/404.html
+server_config=\
+"server {
+	listen 80 default_server;
+	listen [::]:80 default_server;
+	root /var/www/html;
+	index index.html index.htm index.nginx-debian.html;
+	server_name _;
+	add_header X-Served-By \$hostname;
+	location / {
+		try_files \$uri \$uri/ =404;
+	}
+	if (\$request_filename ~ redirect_me){
+		rewrite ^ https://youtube.com permanent;
+	}
+	error_page 404 /404.html;
+	location = /404.html {
+		internal;
+	}
+}"
 
-# Configure Nginx server block
-sudo tee /etc/nginx/sites-enabled/default > /dev/null <<EOL
-server {
-    listen 80 default_server;
-    listen [::]:80 default_server;
-    root /var/www/html;
-    index index.html index.htm index.nginx-debian.html;
-    server_name _;
-    add_header X-Served-By \$hostname;
-
-    location / {
-        try_files \$uri \$uri/ =404;
-    }
-
-    if (\$request_filename ~ redirect_me){
-        rewrite ^ https://youtube.com permanent;
-    }
-
-    error_page 404 /404.html;
-    location = /404.html {
-        internal;
-    }
-}
-EOL
-
-# Restart Nginx to apply changes
+echo "$server_config" > /etc/nginx/sites-enabled/default
 sudo service nginx restart
-
