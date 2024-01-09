@@ -1,13 +1,8 @@
 #!/usr/bin/env bash
-
 # Update the package list and install Nginx
+# Allow HTTP traffic through UFW
 sudo apt-get -y update
 sudo apt-get -y install nginx
-
-# Allow HTTP traffic through UFW
-sudo ufw allow 'Nginx HTTP'
-
-# Create directories and set permissions
 sudo mkdir -p /var/www/html /var/www/error
 sudo chmod -R 755 /var/www
 
