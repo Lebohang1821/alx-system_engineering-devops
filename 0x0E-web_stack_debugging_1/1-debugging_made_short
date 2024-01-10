@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# By using what you did for task #0, make your fix short and sweet
+ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# It tart Nginx in the background
+service nginx start &
+
+# Wait for moment to ensure Nginx has started
+sleep 2
+
+# It kills first Nginx process
+kill -9 "$(pgrep 'nginx' | head -1)"
