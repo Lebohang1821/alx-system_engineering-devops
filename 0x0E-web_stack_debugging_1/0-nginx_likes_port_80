@@ -1,0 +1,9 @@
+#!/usr/bin/env bash
+# It configures a server to above requirements
+rm /etc/nginx/sites-enabled/default
+
+#It creates symbolic link to default configuration
+ln -s /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
+
+# It estart Nginx service
+service nginx restart
