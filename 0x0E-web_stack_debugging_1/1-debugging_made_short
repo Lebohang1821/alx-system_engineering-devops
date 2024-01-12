@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# By using what you did for task #0, make your fix short and sweet
+# By using what you did for task #0, make fix short and sweet
 ln -sf /etc/nginx/sites-available/default /etc/nginx/sites-enabled/default
 service nginx start
 kill "$(pgrep 'nginx' | head -1)"
