@@ -1,3 +1,4 @@
+# Install ufw
 sudo apt-get install ufw
 sed -i 's/IPV6=.*/IPV6=yes/' /etc/default/ufw
 sudo ufw status
