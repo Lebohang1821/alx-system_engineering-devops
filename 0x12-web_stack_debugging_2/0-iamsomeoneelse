@@ -1,9 +1,4 @@
 #!/bin/bash
 # It check if correct number of arguments is provided
-if [ "$#" -ne 1 ]; then
-    echo "Usage: $0 <username>"
-    exit 1
-fi
-
 # It run whoami command under specified user
 sudo -u "$1" whoami
