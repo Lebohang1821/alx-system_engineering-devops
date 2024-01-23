@@ -1,4 +1,3 @@
 #!/bin/bash
 # It check if correct number of arguments is provided
-# It run whoami command under specified user
 sudo -u "$1" whoami
