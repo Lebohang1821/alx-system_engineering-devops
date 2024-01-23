@@ -1,3 +1,9 @@
 #!/usr/bin/env bash
-# It should accepts one argument
+# It should accepts one arg
+if [ "$#" -ne 1 ]; then
+    echo "Usage: $0 <username>"
+    exit 1
+fi
+
+# Run whoami command under specified user
 sudo -u "$1" whoami
