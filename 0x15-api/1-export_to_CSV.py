@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-'''returns information about TODO list progress by employee id.'''
+'''It export data in the CSV format.'''
 import csv
 import requests
 from sys import argv
