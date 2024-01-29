@@ -12,7 +12,7 @@ if __name__ == '__main__':
     users = requests.get('https://jsonplaceholder.typicode.com/users')
     users = users.json()
 
-    # Extracting user information based on the provided user ID from command line argument
+    # Extract usr info based on provided user ID from comand line arg
     user = [i for i in users if i.get('id') == int(argv[1])][0]
 
     # Filtering tasks based on the provided user ID
