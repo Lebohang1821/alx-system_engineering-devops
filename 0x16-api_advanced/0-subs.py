@@ -11,16 +11,17 @@ def number_of_subscribers(subreddit):
         It returns number of subscribers for given subreddit
     '''
     user = {'User-Agent': 'Lizzie'}
-    url = requests.get('https://www.reddit.com/r/{}/about.json'
-                       .format(subreddit), headers=user).json()
     try:
-        return url['data']['subscribers']  # Accessing dictionary directly
+        url = requests.get('https://www.reddit.com/r/{}/about.json'.format(subreddit), headers=user)
+        url.raise_for_status()  # Raise an exception for bad status codes
+        data = url.json()
+        return data['data']['subscribers']
+    except requests.exceptions.RequestException as e:
+        print("Error:", e)
+        return 0  # Return 0 if there's an issue with the request
     except KeyError:
         print("Subreddit not found or private.")
         return 0  # Return 0 for non-existing or private subreddit
-    except Exception as e:
-        print("An error occurred:", e)
-        return 0  # Return 0 for any other error
 
 
 if __name__ == "__main__":
