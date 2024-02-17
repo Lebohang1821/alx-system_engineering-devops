@@ -32,3 +32,12 @@ def number_of_subscribers(subreddit):
     except requests.exceptions.RequestException as e:
         print("Error:", e)
         return 0  # Return 0 if there's an issue with the request
+
+if __name__ == "__main__":
+    import sys
+    if len(sys.argv) != 2:
+        print("Usage: python script_name.py subreddit_name")
+    else:
+        subreddit = sys.argv[1]
+        subscribers = number_of_subscribers(subreddit)
+        print("Number of subscribers:", subscribers)
