@@ -1,26 +1,30 @@
 #!/usr/bin/python3
 """Function to query subscribers on a given Reddit subreddit."""
 import requests
-from json.decoder import JSONDecodeError
 
 def number_of_subscribers(subreddit):
-    '''
-        It returns number of subscribers for given subreddit
-    '''
-    user_agent = {'User-Agent': 'Lizzie'}
-    try:
-        response = requests.get(
-            f'https://www.reddit.com/r/{subreddit}/about.json',
-            headers=user_agent
-        )
-        response.raise_for_status()  # Raise an exception for bad status codes
+    url = f"https://www.reddit.com/r/{subreddit}/about.json"
+    headers = {'User-Agent': 'Custom User Agent'}  # Set a custom User-Agent to avoid potential issues
 
-        # Check if response contains valid JSON data
-        try:
-            data = response.json()
-        except JSONDecodeError:
-            print("Subreddit not found or private.")
-            return 0
+    try:
+        response = requests.get(url, headers=headers)
+        data = response.json()
+        subscribers = data['data']['subscribers']
+        return subscribers
+    except (KeyError, requests.RequestException):
+        # Invalid subreddit or error during request
+        return 0
+
+# Test the function
+if __name__ == "__main__":
+    import sys
+
+    if len(sys.argv) < 2:
+        print("Please pass an argument for the subreddit to search.")
+    else:
+        subreddit = sys.argv[1]
+        print("{:d}".format(number_of_subscribers(subreddit)))
+
 
         # Check if the response contains valid data structure
         if 'data' in data and 'subscribers' in data['data']:
