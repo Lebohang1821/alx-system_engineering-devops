@@ -29,6 +29,12 @@ def number_of_subscribers(subreddit):
             print("Invalid response format.")
             return 0
 
+    except requests.exceptions.HTTPError as http_err:
+        if response.status_code == 403:
+            print("Subreddit is blocked or private.")
+        else:
+            print("HTTP Error occurred:", http_err)
+        return 0
     except requests.exceptions.RequestException as e:
         print("Error:", e)
         return 0  # Return 0 if there's an issue with the request
