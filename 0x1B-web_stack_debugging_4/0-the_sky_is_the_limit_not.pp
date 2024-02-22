@@ -1,4 +1,4 @@
-# It increases amount of traffic Nginx server can handle
+# It increases amount of traffic Nginx server can handle.
 
 exec {'modify max open files limit setting':
   command => 'sed -i "s/15/10000/" /etc/default/nginx && sudo service nginx restart',
